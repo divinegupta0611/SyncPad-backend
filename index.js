@@ -7,7 +7,22 @@ const app = express();
 const server = http.createServer(app);
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:5173","https://sync-pad-frontend-83d2xo0qx-divinegupta0611s-projects.vercel.app","https://sync-pad-frontend-git-main-divinegupta0611s-projects.vercel.app"],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:3000",
+      "http://localhost:3001", 
+      "http://localhost:5173",
+      /\.vercel\.app$/  // Allow all Vercel deployments
+    ];
+    
+    if (!origin || allowedOrigins.some(allowed => 
+      typeof allowed === 'string' ? allowed === origin : allowed.test(origin)
+    )) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"]
