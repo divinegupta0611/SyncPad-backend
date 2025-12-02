@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:5173"],
+  origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:5173","https://sync-pad-frontend-83d2xo0qx-divinegupta0611s-projects.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"]
